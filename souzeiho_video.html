@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>選択科目動画（租税法）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:  #FDE68A; --gold-b: #92400E; --gold-d: #3d2e00;
+  --blue:  #BFDBFE; --blue-b: #1e40af; --blue-d: #0d2545;
+  --purp:  #DDD6FE; --purp-b: #4C1D95; --purp-d: #1e1552;
+  --emer:  #A7F3D0; --emer-b: #064E3B; --emer-d: #022c1e;
+  --black: #1a1a18;
+
+  --bg:       #fafaf8;
+  --bg2:      #f2f0ea;
+  --card:     #ffffff;
+  --border:   rgba(26,26,24,0.11);
+  --text-p:   #1a1a18;
+  --text-s:   #5f5e5a;
+  --text-h:   #9c9a92;
+  --shadow:   0 2px 20px rgba(0,0,0,0.06);
+  --radius:   16px;
+  --serif:    'Noto Serif JP', serif;
+  --sans:     'Noto Sans JP', sans-serif;
+}
+[data-theme="dark"] {
+  --bg:     #141412;
+  --bg2:    #1e1e1c;
+  --card:   #242420;
+  --border: rgba(255,255,255,0.09);
+  --text-p: #e8e6dc;
+  --text-s: #9c9a92;
+  --text-h: #5f5e5a;
+  --shadow: 0 2px 24px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text-p);
+  font-family: var(--sans);
+  line-height: 1.8;
+  transition: background .25s, color .25s;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  height: 52px;
+  background: var(--card);
+  border-bottom: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  transition: background .25s;
+}
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.school-badge {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  background: var(--gold); color: var(--gold-b);
+  border: 1px solid var(--gold-b);
+  padding: 2px 10px; border-radius: 20px;
+}
+[data-theme="dark"] .school-badge { background: var(--gold-d); color: var(--gold); }
+.topbar-title { font-size: 13px; font-weight: 500; color: var(--text-s); }
+.theme-btn {
+  font-size: 12px; color: var(--text-s);
+  background: none; border: 0.5px solid var(--border);
+  border-radius: 20px; padding: 4px 14px; cursor: pointer;
+  transition: background .15s;
+}
+.theme-btn:hover { background: var(--bg2); }
+
+/* ── HERO ── */
+.hero {
+  max-width: 760px; margin: 0 auto;
+  padding: 72px 2rem 56px;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: .14em; font-weight: 700;
+  color: var(--text-h); text-transform: uppercase; margin-bottom: 18px;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(30px, 5.5vw, 50px);
+  font-weight: 700; line-height: 1.25;
+  margin-bottom: 20px;
+}
+.hero-lead {
+  font-size: 15px; color: var(--text-s);
+  max-width: 520px; margin: 0 auto 36px;
+  line-height: 1.9;
+}
+.hero-note {
+  display: inline-block; font-size: 12px; color: var(--text-h);
+  border: 0.5px solid var(--border);
+  border-radius: 8px; padding: 7px 18px;
+}
+
+/* ── SECTION CARDS ── */
+.sections {
+  max-width: 760px; margin: 0 auto;
+  padding: 0 2rem 80px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+
+.sec-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: background .25s, border-color .25s;
+}
+
+/* カラーアクセントバー */
+.sec-card.c-I   { border-top: 3px solid var(--gold-b); }
+.sec-card.c-II  { border-top: 3px solid var(--blue-b); }
+.sec-card.c-III { border-top: 3px solid var(--emer-b); }
+[data-theme="dark"] .sec-card.c-I   { border-top-color: var(--gold); }
+[data-theme="dark"] .sec-card.c-II  { border-top-color: var(--blue); }
+[data-theme="dark"] .sec-card.c-III { border-top-color: var(--emer); }
+
+.sec-header {
+  padding: 24px 28px 20px;
+  display: flex; align-items: flex-start; gap: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+.sec-num {
+  font-family: var(--serif);
+  font-size: 13px; font-weight: 700; letter-spacing: .04em;
+  padding: 3px 12px; border-radius: 20px;
+  border: 1px solid; white-space: nowrap; margin-top: 3px;
+  flex-shrink: 0;
+}
+.c-I   .sec-num { background: var(--gold); color: var(--gold-b); border-color: var(--gold-b); }
+.c-II  .sec-num { background: var(--blue); color: var(--blue-b); border-color: var(--blue-b); }
+.c-III .sec-num { background: var(--emer); color: var(--emer-b); border-color: var(--emer-b); }
+[data-theme="dark"] .c-I   .sec-num { background: var(--gold-d); color: var(--gold); border-color: var(--gold); }
+[data-theme="dark"] .c-II  .sec-num { background: var(--blue-d); color: var(--blue); border-color: var(--blue); }
+[data-theme="dark"] .c-III .sec-num { background: var(--emer-d); color: var(--emer); border-color: var(--emer); }
+
+.sec-title-wrap { flex: 1; }
+.sec-title {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.5vw, 21px);
+  font-weight: 700; line-height: 1.35;
+  margin-bottom: 6px;
+}
+.sec-subtitle { font-size: 12px; color: var(--text-h); line-height: 1.6; }
+.sec-toggle {
+  font-size: 18px; color: var(--text-h);
+  transition: transform .25s; flex-shrink: 0; margin-top: 2px;
+}
+.sec-card.open .sec-toggle { transform: rotate(180deg); }
+
+/* ── BODY (collapsible) ── */
+.sec-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .4s ease;
+}
+.sec-card.open .sec-body { max-height: 2000px; }
+
+.sec-body-inner {
+  padding: 0 28px 28px;
+  border-top: 0.5px solid var(--border);
+}
+
+/* 動画プレースホルダー */
+.video-wrap {
+  margin-bottom: 24px;
+  border-radius: 12px; overflow: hidden;
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  position: relative;
+  padding-top: 56.25%; /* 16:9 */
+}
+.video-wrap iframe {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+.video-placeholder {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+  color: var(--text-h);
+}
+.video-placeholder .play-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.video-placeholder p { font-size: 13px; }
+
+/* テキスト概要 */
+.sec-summary {
+  font-size: 14px; color: var(--text-s);
+  line-height: 1.9;
+}
+.sec-summary p + p { margin-top: 1em; }
+.sec-summary strong { color: var(--text-p); font-weight: 700; }
+
+/* ── FOOTER ── */
+footer {
+  max-width: 760px; margin: 0 auto;
+  padding: 32px 2rem 48px;
+  border-top: 0.5px solid var(--border);
+  font-size: 12px; color: var(--text-h);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 10px;
+}
+.footer-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.ftag {
+  font-size: 10px; padding: 2px 10px; border-radius: 12px;
+  border: 0.5px solid var(--border); color: var(--text-h);
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-left">
+    <span class="school-badge">同志社 LS</span>
+    <span class="topbar-title">選択科目動画（租税法）</span>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">🌙 ダーク</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Doshisha Law School — 租税法</p>
+  <h1 class="hero-title">選択科目動画（租税法）</h1>
+  <p class="hero-lead">
+    気になるテーマの動画を選んで見てください。
+  </p>
+  <span class="hero-note">＊ 司法試験で租税法を選択しない方の履修も歓迎します</span>
+</div>
+
+<!-- SECTION CARDS -->
+<div class="sections">
+
+  <!-- I -->
+  <div class="sec-card c-I" id="sec1">
+    <div class="sec-header" onclick="toggle('sec1')">
+      <span class="sec-num">I</span>
+      <div class="sec-title-wrap">
+        <p class="sec-title">「租税法」とは</p>
+        <p class="sec-subtitle">租税法の全体像 ／ 条文を見てみよう ／ 具体例（財産分与）</p>
+      </div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="sec-body">
+      <div class="sec-body-inner">
+
+        <!-- 動画 -->
+        <div class="video-wrap" id="video1">
+          <div class="video-placeholder">
+            <div class="play-icon">▶</div>
+            <p>動画を準備中です</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- II -->
+  <div class="sec-card c-II" id="sec2">
+    <div class="sec-header" onclick="toggle('sec2')">
+      <span class="sec-num">II</span>
+      <div class="sec-title-wrap">
+        <p class="sec-title">司法試験選択科目としての租税法</p>
+        <p class="sec-subtitle">出題範囲 ／ メリット・デメリット ／ 同志社 LS の4科目</p>
+      </div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="sec-body">
+      <div class="sec-body-inner">
+
+        <div class="video-wrap" id="video2">
+          <div class="video-placeholder">
+            <div class="play-icon">▶</div>
+            <p>動画を準備中です</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- III -->
+  <div class="sec-card c-III" id="sec3">
+    <div class="sec-header" onclick="toggle('sec3')">
+      <span class="sec-num">III</span>
+      <div class="sec-title-wrap">
+        <p class="sec-title">何の役に立つのか</p>
+        <p class="sec-subtitle">弁護士 ／ 企業内法律家 ／ 検察官・裁判官</p>
+      </div>
+      <span class="sec-toggle">▾</span>
+    </div>
+    <div class="sec-body">
+      <div class="sec-body-inner">
+
+        <div class="video-wrap" id="video3">
+          <div class="video-placeholder">
+            <div class="play-icon">▶</div>
+            <p>動画を準備中です</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div><!-- /sections -->
+
+<footer>
+  <span>同志社大学法科大学院 ／ 選択科目動画（租税法）</span>
+  <div class="footer-tags">
+    <span class="ftag" style="background:var(--gold);color:var(--gold-b);border-color:var(--gold-b);">租税法 I</span>
+    <span class="ftag" style="background:var(--blue);color:var(--blue-b);border-color:var(--blue-b);">租税法 II</span>
+    <span class="ftag" style="background:var(--purp);color:var(--purp-b);border-color:var(--purp-b);">総合演習</span>
+    <span class="ftag" style="background:var(--emer);color:var(--emer-b);border-color:var(--emer-b);">国際租税法</span>
+  </div>
+</footer>
+
+<script>
+function toggle(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const dark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', dark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = dark ? '🌙 ダーク' : '☀️ ライト';
+}
+
+// ページ読み込み時、最初のカードを開く
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('sec1').classList.add('open');
+});
+
+// YouTube動画を埋め込む関数（後から呼び出す）
+// 使い方: embedVideo(1, 'YouTube動画ID');
+//         例: embedVideo(1, 'dQw4w9WgXcQ');
+function embedVideo(n, youtubeId) {
+  const wrap = document.getElementById('video' + n);
+  wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + youtubeId + '?rel=0" allowfullscreen></iframe>';
+}
+</script>
+</body>
+</html>
